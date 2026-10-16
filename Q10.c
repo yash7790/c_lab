@@ -1,22 +1,33 @@
 #include <stdio.h>
 
-int main() {
-    int n, i, j, num;
+void towerOfHanoi(int n, char source,
+                  char auxiliary, char destination) {
+    if (n == 1) {
+        printf("Move disk 1 from %c to %c\n",
+               source, destination);
+        return;
+    }
 
-    printf("Enter number of rows: ");
+    towerOfHanoi(n - 1, source, destination, auxiliary);
+
+    printf("Move disk %d from %c to %c\n",
+           n, source, destination);
+
+    towerOfHanoi(n - 1, auxiliary, source, destination);
+}
+
+int main() {
+    int n;
+
+    printf("Enter number of disks: ");
     scanf("%d", &n);
 
-    for (i = 0; i < n; i++) {
-        num = 1;
-
-        for (j = 0; j <= i; j++) {
-            printf("%d ", num);
-
-            num = num * (i - j) / (j + 1);
-        }
-
-        printf("\n");
+    if (n < 1 || n > 20) {
+        printf("Enter a number between 1 and 20.\n");
+        return 0;
     }
+
+    towerOfHanoi(n, 'A', 'B', 'C');
 
     return 0;
 }

@@ -1,12 +1,30 @@
-#include<stdio.h>
-int main(){
-int i,n;
-printf("enter the number of which you need table:");
-scanf("%d",&n);
-
-for(i=1;i<=10;i++);
+# include <stdio.h>
+long long fact (int n)
 {
-    printf("table=%d\n",i*n);
+
+if (n==0 || n==1)
+return 1;
+
+else 
+return n*fact(n-1);
+
 }
+int main ()
+{
+int n;
+scanf("%d", &n);
+if (n<0)
+ {
+   n=-n;
+
+ }
+else
+
+ {
+   printf("%lld",fact(n) );
+
+ } 
+
 return 0;
+
 }

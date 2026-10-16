@@ -1,26 +1,48 @@
-#include<stdio.h>
-int main () {
+#include <stdio.h>
+#include <limits.h>
 
-int i,n,sum=0;
-printf("enter the number:");
-scanf("%d",&n);
-for(i=1;i<=n/2;i++)
-{
-if(n%i==0)
-{
-    sum=sum+i;
-}
-}
+long long secondLargest(int a[], int n, int i,
+                        long long largest, long long second) {
+    if (i == n)
+        return second;
 
-if(sum==n)
-{printf("%d is a perfect number",n);
+    if (a[i] > largest) {
+        second = largest;
+        largest = a[i];
+    } else if (a[i] < largest && a[i] > second) {
+        second = a[i];
     }
-else
-{
-    printf("%d is the number is not a perfect number",n);
 
-}
-return 0;
+    return secondLargest(a, n, i + 1, largest, second);
 }
 
-    
+int main() {
+    int a[100], n;
+    long long largest = LLONG_MIN;
+    long long second;
+
+    printf("Enter array size: ");
+    scanf("%d", &n);
+
+    if (n < 1 || n > 100) {
+        printf("Invalid array size.\n");
+        return 0;
+    }
+
+    printf("Enter array elements: ");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &a[i]);
+
+        if (a[i] > largest)
+            largest = a[i];
+    }
+
+    second = secondLargest(a, n, 0, LLONG_MIN, LLONG_MIN);
+
+    if (second == LLONG_MIN)
+        printf("Fewer than two distinct elements exist.\n");
+    else
+        printf("Second-largest distinct element = %lld\n", second);
+
+    return 0;
+}

@@ -1,15 +1,25 @@
-#include<stdio.h>
-int main (){
-int a=0,b=1,c,i,n=6;
-for (i=1;i<=n;i++)
+#include <stdio.h>
+int fibo (int n)
 {
-printf("%d\n",a);
-c=a+b;
-a=b;
-b=c;    
+ if (n==0 || n==1)
+return n;
+
+else 
+return fibo(n-1)+fibo(n-2);
+
 }
 
-return 0;
+int main ()
+{
 
+    int n ;
+    printf ("enter the number :");
+    scanf ( "%d", &n);
 
+    for (int i=0; i<=n; i++)
+    {
+        printf ("%d", fibo(i) );
+    }
+
+    return 0;
 }
